@@ -1,13 +1,17 @@
 
 use std::io;
 extern crate serde_json;
+extern crate serde;
 
 use io::BufReader;
 use std::fs::File;
 use serde::{Deserialize, Serialize};
+// use serde_json::Value as JsonValue;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct User {
+    // #[serde(rename(deserialize = "user_id"))]
     user_id: u32,
     id: u32,
     title: String,
@@ -18,18 +22,10 @@ fn main() -> io::Result<()> {
 
     let file = File::open("data.json")?;
     let reader = BufReader::new(file);
-    // let mut content = "".into();
 
-    let content = serde_json::from_reader(reader)?;
+    let content: Vec<User> = serde_json::from_reader(reader)?;
 
     println!("content {:?}", content);
-
-
-    // file.read_to_string(&mut content)?;
-
-    // let users = serde_json::(content)?;
-
-    // println!("content {}", content);
 
     Ok(())
 }
