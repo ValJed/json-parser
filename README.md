@@ -1,3 +1,3 @@
 # Rust Json Parser
 
-Simply try to parse and deserialize JSON file, using serde crate. 
+Playing with Serde Json to deserialize json from files, manipulate data, and serialize into files.
